@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anmol Mishra — Full-Stack Developer</title>
+  <meta name="description" content="Anmol Mishra — Full-stack developer building AI-powered products with Laravel, Next.js, and GPT integrations. Based in Gurugram, India." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0c0a09',
+            'ink-soft': '#1a1614',
+            'ink-card': '#13100e',
+            paper: '#f5f3ef',
+            muted: '#a8a29e',
+            dim: '#57534e',
+            glow: '#d4a574',
+            'glow-bright': '#e6b885',
+          },
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'serif'],
+            sans: ['Geist', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0c0a09;
+      color: #f5f3ef;
+      font-family: 'Geist', system-ui, sans-serif;
+      font-weight: 300;
+      letter-spacing: -0.005em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    }
+
+    /* Hero radial glow */
+    .hero-glow {
+      background:
+        radial-gradient(ellipse 80% 50% at 30% 0%, rgba(212, 165, 116, 0.10), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 30%, rgba(212, 165, 116, 0.05), transparent 60%);
+    }
+
+    /* Custom cursor for accent */
+    .cursor-blink::after {
+      content: '▍';
+      color: #d4a574;
+      animation: blink 1s infinite step-end;
+      margin-left: 2px;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger > * { opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .stagger.in > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger.in > *:nth-child(2) { transition-delay: 0.15s; }
+    .stagger.in > *:nth-child(3) { transition-delay: 0.25s; }
+    .stagger.in > *:nth-child(4) { transition-delay: 0.35s; }
+    .stagger.in > *:nth-child(5) { transition-delay: 0.45s; }
+    .stagger.in > * { opacity: 1; transform: translateY(0); }
+
+    /* Pill */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border: 1px solid rgba(245, 243, 239, 0.10);
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #a8a29e;
+      background: rgba(245, 243, 239, 0.02);
+      transition: all 0.3s ease;
+    }
+    .pill:hover { color: #d4a574; border-color: rgba(212, 165, 116, 0.4); }
+
+    /* Live dot */
+    .live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #84cc16;
+      box-shadow: 0 0 8px rgba(132, 204, 22, 0.6);
+      animation: pulse 2s ease-in-out infinite;
+      margin-right: 8px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* Section number */
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #57534e;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    /* Project card hover */
+    .project-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(245, 243, 239, 0.08);
+    }
+    .project-card:hover {
+      border-color: rgba(212, 165, 116, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Underline link */
+    .ulink {
+      position: relative;
+      color: #f5f3ef;
+      transition: color 0.3s;
+    }
+    .ulink::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ulink:hover { color: #d4a574; }
+    .ulink:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    /* Nav link */
+    .nav-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #a8a29e;
+      transition: color 0.3s;
+    }
+    .nav-link:hover { color: #d4a574; }
+
+    /* Timeline rail */
+    .timeline-item {
+      position: relative;
+      padding-left: 28px;
+      border-left: 1px solid rgba(245, 243, 239, 0.10);
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #d4a574;
+      box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.12);
+    }
+
+    main { position: relative; z-index: 2; }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-ink/70 border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10 py-4 flex items-center justify-between">
+      <a href="#top" class="font-serif italic text-lg">Anmol Mishra</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#about" class="nav-link">01 about</a>
+        <a href="#stack" class="nav-link">02 stack</a>
+        <a href="#experience" class="nav-link">03 experience</a>
+        <a href="#work" class="nav-link">04 work</a>
+        <a href="#contact" class="nav-link">05 contact</a>
+      </div>
+      <a href="#contact" class="md:hidden nav-link">contact →</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="top" class="hero-glow min-h-screen flex items-center px-6 sm:px-10 pt-24 pb-16">
+      <div class="max-w-6xl mx-auto w-full">
+        <div class="stagger reveal">
+          <div class="flex items-center mb-10">
+            <span class="live-dot"></span>
+            <span class="font-mono text-xs text-muted tracking-wider uppercase">Currently engineering AI products in Gurugram</span>
+          </div>
+
+          <h1 class="font-serif text-[clamp(3.5rem,11vw,9rem)] leading-[0.95] tracking-tight mb-6">
+            Anmol <span class="italic">Mishra.</span>
+          </h1>
+
+          <p class="text-xl sm:text-2xl text-paper/80 font-light max-w-3xl leading-relaxed mb-10">
+            Full-stack developer building <span class="text-glow italic font-serif text-2xl sm:text-3xl">AI-powered products</span> with Laravel, Next.js, and GPT integrations.
+          </p>
+
+          <div class="flex flex-wrap gap-2 mb-12">
+            <span class="pill">Laravel</span>
+            <span class="pill">Next.js</span>
+            <span class="pill">React</span>
+            <span class="pill">PHP</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">GPT API</span>
+            <span class="pill">REST APIs</span>
+          </div>
+
+          <div class="flex items-center gap-2 font-mono text-xs text-dim">
+            <span>scroll</span>
+            <span class="cursor-blink"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="px-6 sm:px-10 py-24 sm:py-32">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal">
+          <p class="section-num mb-4">— 01 / about</p>
+          <h2 class="section-title mb-16 max-w-3xl">A developer who likes shipping real things.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-12 md:gap-16">
+          <div class="md:col-span-2 space-y-6 text-paper/75 leading-relaxed reveal">
+            <p>
+              I'm a full-stack developer with 2.5+ years of experience building production web applications. I work primarily with Laravel on the backend and Next.js on the frontend, and lately I've been spending most of my time on AI integration work — wiring GPT-based models into real product workflows.
+            </p>
+            <p>
+              Right now I'm the lead developer on <span class="text-glow font-serif italic">Imagive AI</span> at Ekaleido Innovations, an AI content generation platform serving enterprise clients. I built it from scratch — the Laravel REST backend, the Next.js SSR frontend, the queue-based job processing, the GPT integration layer.
+            </p>
+            <p>
+              I care about the unglamorous parts of software: clean APIs, sensible database schemas, error handling that actually helps when things break, and code that the next person can read. I'm comfortable owning features end-to-end and want to keep working on products where AI is a meaningful part of the stack — not a marketing label.
+            </p>
+          </div>
+
+          <aside class="reveal">
+            <div class="space-y-6 font-mono text-xs">
+              <div>
+                <p class="text-dim uppercase tracking-wider mb-1">Based in</p>
+                <p class="text-paper/90">Gurugram, India</p>
+              </div>
+              <div>
+                <p class="text-dim uppercase tracking-wider mb-1">Currently</p>
+                <p class="text-paper/90">Laravel Developer<br/>Ekaleido Innovations</p>
+              </div>
+              <div>
+                <p class="text-dim uppercase tracking-wider mb-1">Focus</p>
+                <p class="text-paper/90">AI integration<br/>Full-stack systems</p>
+              </div>
+              <div>
+                <p class="text-dim uppercase tracking-wider mb-1">Open to</p>
+                <p class="text-glow">Full-time roles · Remote / Hybrid</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-white/5">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal">
+          <p class="section-num mb-4">— 02 / stack</p>
+          <h2 class="section-title mb-16 max-w-3xl">The tools I reach for.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-x-16 gap-y-12">
+          <div class="reveal">
+            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// backend</p>
+            <p class="text-paper/85 leading-loose">
+              PHP · Laravel · Eloquent ORM · MVC architecture · RESTful API design · Authentication &amp; authorization · Queue-based job processing
+            </p>
+          </div>
+
+          <div class="reveal">
+            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// frontend</p>
+            <p class="text-paper/85 leading-loose">
+              JavaScript · React.js · Next.js (SSR) · Redux · HTML5 · CSS3 · Tailwind CSS · Bootstrap · Responsive design
+            </p>
+          </div>
+
+          <div class="reveal">
+            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// ai &amp; integrations</p>
+            <p class="text-paper/85 leading-loose">
+              OpenAI / GPT API · Prompt engineering · Web scraping (Symfony DomCrawler, Guzzle) · Async job pipelines for model calls
+            </p>
+          </div>
+
+          <div class="reveal">
+            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// data &amp; infra</p>
+            <p class="text-paper/85 leading-loose">
+              MySQL · PostgreSQL · Schema design · Query optimization · Google Cloud Platform (GCP)
+            </p>
+          </div>
+
+          <div class="reveal md:col-span-2">
+            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// tools &amp; practices</p>
+            <p class="text-paper/85 leading-loose">
+              Git &amp; GitHub · Composer · Postman · Agile / Scrum · Code review · Debugging across the stack
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-white/5">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal">
+          <p class="section-num mb-4">— 03 / experience</p>
+          <h2 class="section-title mb-16 max-w-3xl">Where I've been building.</h2>
+        </div>
+
+        <div class="space-y-14 max-w-4xl">
+
+          <article class="timeline-item reveal">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+              <h3 class="text-xl font-medium text-paper">Laravel Developer</h3>
+              <span class="font-mono text-xs text-dim">Jul 2024 — Present</span>
+            </div>
+            <p class="text-glow font-serif italic text-lg mb-6">Ekaleido Innovations Pvt Ltd · Gurugram, India</p>
+            <ul class="space-y-3 text-paper/75 leading-relaxed list-disc list-outside ml-5 marker:text-dim">
+              <li>Lead developer on <span class="text-paper">Imagive AI</span>, an AI content generation platform serving enterprise clients with copywriting, ad copy, and UGC scripts.</li>
+              <li>Built the Laravel backend from scratch — REST API design, authentication, role-based authorization, and queue-based job processing for asynchronous AI generation.</li>
+              <li>Developed the Next.js frontend with server-side rendering for SEO and faster initial loads; managed application state with Redux.</li>
+              <li>Integrated multiple GPT-based models for context-aware content generation, including prompt templating and output post-processing.</li>
+              <li>Built web scraping modules using Symfony DomCrawler and Guzzle to collect and structure data from external sources for downstream AI workflows.</li>
+            </ul>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+              <h3 class="text-xl font-medium text-paper">Web Developer</h3>
+              <span class="font-mono text-xs text-dim">Aug 2023 — Jul 2024</span>
+            </div>
+            <p class="text-glow font-serif italic text-lg mb-6">Riveyra Infotech Pvt Ltd · Kanpur, India</p>
+            <ul class="space-y-3 text-paper/75 leading-relaxed list-disc list-outside ml-5 marker:text-dim">
+              <li>Built and maintained client-facing web applications for multiple clients using Laravel, PHP, and Bootstrap.</li>
+              <li>Implemented responsive frontend layouts ensuring a consistent experience across desktop, tablet, and mobile breakpoints.</li>
+              <li>Optimized database queries and Eloquent relationships to improve application performance.</li>
+              <li>Debugged and resolved production issues across the full stack — backend logic, database queries, and frontend rendering — under client-driven timelines.</li>
+              <li>Owned features end-to-end: requirements, implementation, testing, deployment, and post-release maintenance.</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-white/5">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal">
+          <p class="section-num mb-4">— 04 / work</p>
+          <h2 class="section-title mb-16 max-w-3xl">Selected work.</h2>
+        </div>
+
+        <article class="project-card rounded-lg p-8 sm:p-12 bg-ink-card reveal">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-8">
+            <div>
+              <p class="font-mono text-xs text-dim mb-2">FEATURED PROJECT · 2024 — PRESENT</p>
+              <a href="https://www.imagive.ai/" target="_blank" rel="noopener" class="group inline-flex items-baseline gap-3 hover:text-glow transition-colors">
+                <h3 class="font-serif italic text-4xl sm:text-5xl">Imagive AI</h3>
+                <span class="font-mono text-xs text-dim group-hover:text-glow transition-colors">↗ visit</span>
+              </a>
+            </div>
+            <span class="pill" style="border-color: rgba(132, 204, 22, 0.4); color: #a3e635;">
+              <span class="live-dot" style="background: #84cc16;"></span>In production
+            </span>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-10">
+            <div class="md:col-span-2 space-y-4 text-paper/75 leading-relaxed">
+              <p>
+                An enterprise AI content generation platform — copywriting, Facebook &amp; Google ad copy, and UGC scripts, powered by GPT-based models with custom prompt engineering for each content type.
+              </p>
+              <p>
+                I designed and built the entire stack: a Laravel REST backend with queue-based job processing for long-running AI generations, a Next.js SSR frontend for SEO and fast initial loads, and an integration layer that handles prompt templating, model calls, and output post-processing.
+              </p>
+              <p>
+                The work spans schema design, API contracts for users / generations / billing / templates, secure authentication flows, error handling for upstream model failures, and structured logging across the application.
+              </p>
+            </div>
+
+            <div class="space-y-6">
+              <div>
+                <p class="font-mono text-xs text-dim uppercase tracking-wider mb-3">Stack</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="pill">Laravel</span>
+                  <span class="pill">Next.js</span>
+                  <span class="pill">React</span>
+                  <span class="pill">Redux</span>
+                  <span class="pill">MySQL</span>
+                  <span class="pill">GPT API</span>
+                  <span class="pill">GCP</span>
+                </div>
+              </div>
+              <div>
+                <p class="font-mono text-xs text-dim uppercase tracking-wider mb-3">Role</p>
+                <p class="text-paper/85 text-sm">Lead developer · End-to-end ownership</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-10 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
+            <p class="font-mono text-xs text-dim">www.imagive.ai</p>
+            <a href="https://www.imagive.ai/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 border border-glow/40 rounded-full text-glow hover:bg-glow hover:text-ink transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+              Visit live site
+              <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <p class="font-mono text-xs text-dim mt-12 text-center">More projects shipping soon →</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="px-6 sm:px-10 py-24 sm:py-40 border-t border-white/5 hero-glow">
+      <div class="max-w-6xl mx-auto">
+        <div class="reveal">
+          <p class="section-num mb-4">— 05 / contact</p>
+          <h2 class="font-serif italic text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] tracking-tight mb-12 max-w-4xl">
+            Let's build something useful together.
+          </h2>
+        </div>
+
+        <div class="reveal max-w-4xl">
+          <p class="text-paper/75 text-lg leading-relaxed mb-12 max-w-2xl">
+            I'm currently open to full-time full-stack roles — especially anything involving AI integration, Laravel, or Next.js. The fastest way to reach me is email.
+          </p>
+
+          <div class="grid sm:grid-cols-3 gap-6 mb-16">
+            <a href="mailto:anmolmishra2304@gmail.com" class="project-card rounded-lg p-6 group block">
+              <p class="font-mono text-xs text-dim uppercase tracking-wider mb-2">Email</p>
+              <p class="text-base text-paper group-hover:text-glow transition-colors break-all">anmolmishra2304@gmail.com</p>
+              <p class="font-mono text-xs text-dim mt-3">→ write me</p>
+            </a>
+
+            <a href="https://linkedin.com/in/anmolmishra23" target="_blank" rel="noopener" class="project-card rounded-lg p-6 group block">
+              <p class="font-mono text-xs text-dim uppercase tracking-wider mb-2">LinkedIn</p>
+              <p class="text-base text-paper group-hover:text-glow transition-colors break-all">/in/anmolmishra23</p>
+              <p class="font-mono text-xs text-dim mt-3">→ connect</p>
+            </a>
+
+            <a href="https://github.com/anmolmishra23-dev" target="_blank" rel="noopener" class="project-card rounded-lg p-6 group block">
+              <p class="font-mono text-xs text-dim uppercase tracking-wider mb-2">GitHub</p>
+              <p class="text-base text-paper group-hover:text-glow transition-colors break-all">/anmolmishra23-dev</p>
+              <p class="font-mono text-xs text-dim mt-3">→ see code</p>
+            </a>
+          </div>
+
+          <div class="font-mono text-xs text-dim flex items-center gap-3">
+            <span>+91 8317010149</span>
+            <span class="text-white/10">/</span>
+            <span>Gurugram · India</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="px-6 sm:px-10 py-10 border-t border-white/5">
+      <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-dim">
+        <p>© <span id="year"></span> Anmol Mishra</p>
+        <p>Built with Tailwind · hosted on GitHub Pages</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
