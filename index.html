@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anmol Mishra — Full-Stack Developer</title>
   <meta name="description" content="Anmol Mishra — Full-stack developer building AI-powered products with Laravel, Next.js, and GPT integrations. Based in Gurugram, India." />
-
+ 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Public+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+ 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -18,148 +18,209 @@
       theme: {
         extend: {
           colors: {
-            ink: '#0c0a09',
-            'ink-soft': '#1a1614',
-            'ink-card': '#13100e',
-            paper: '#f5f3ef',
-            muted: '#a8a29e',
-            dim: '#57534e',
-            glow: '#d4a574',
-            'glow-bright': '#e6b885',
+            paper: '#f4f7f9',
+            card: '#ffffff',
+            ink: '#122036',
+            graphite: '#5a6b80',
+            faint: '#8da0b5',
+            cobalt: '#1f45d9',
+            'cobalt-deep': '#16339f',
+            redline: '#d6492a',
           },
           fontFamily: {
-            serif: ['"Instrument Serif"', 'serif'],
-            sans: ['Geist', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            display: ['"Bricolage Grotesque"', 'sans-serif'],
+            sans: ['"Public Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'monospace'],
           },
         },
       },
     };
   </script>
-
+ 
   <style>
     html { scroll-behavior: smooth; }
+ 
     body {
-      background: #0c0a09;
-      color: #f5f3ef;
-      font-family: 'Geist', system-ui, sans-serif;
+      background-color: #f4f7f9;
+      color: #122036;
+      font-family: 'Public Sans', system-ui, sans-serif;
       font-weight: 300;
-      letter-spacing: -0.005em;
       -webkit-font-smoothing: antialiased;
+      /* Drafting-grid paper */
+      background-image:
+        linear-gradient(rgba(18, 32, 54, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 32, 54, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
     }
-
-    /* Subtle grain overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
+ 
+    ::selection { background: rgba(31, 69, 217, 0.18); }
+ 
+    :focus-visible {
+      outline: 2px solid #1f45d9;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+ 
+    /* ——— Registration marks (drawing crosshairs) ——— */
+    .sheet { position: relative; }
+    .sheet::before,
+    .sheet::after {
+      content: '+';
+      position: absolute;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      line-height: 1;
+      color: rgba(18, 32, 54, 0.28);
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
     }
-
-    /* Hero radial glow */
-    .hero-glow {
+    .sheet::before { top: 0; left: 0; }
+    .sheet::after { bottom: 0; right: 0; }
+ 
+    /* ——— Dimension line with tick marks ——— */
+    .dim-line {
+      flex: 1;
+      height: 9px;
+      min-width: 60px;
       background:
-        radial-gradient(ellipse 80% 50% at 30% 0%, rgba(212, 165, 116, 0.10), transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 30%, rgba(212, 165, 116, 0.05), transparent 60%);
+        repeating-linear-gradient(90deg, rgba(18, 32, 54, 0.25) 0 1px, transparent 1px 48px),
+        linear-gradient(rgba(18, 32, 54, 0.25), rgba(18, 32, 54, 0.25)) bottom / 100% 1px no-repeat;
     }
-
-    /* Custom cursor for accent */
-    .cursor-blink::after {
-      content: '▍';
-      color: #d4a574;
-      animation: blink 1s infinite step-end;
-      margin-left: 2px;
+ 
+    /* ——— Section labels & headings ——— */
+    .section-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: #1f45d9;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
+    .section-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.1rem, 4.6vw, 3.5rem);
+      line-height: 1.04;
+      letter-spacing: -0.025em;
     }
-
-    /* Reveal on scroll */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+ 
+    /* ——— Annotation: dashed redline-style markup under key phrases ——— */
+    .annotated {
+      color: #1f45d9;
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-style: dashed;
+      text-decoration-color: rgba(31, 69, 217, 0.55);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 5px;
     }
-    .reveal.in {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Stagger children */
-    .stagger > * { opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .stagger.in > *:nth-child(1) { transition-delay: 0.05s; }
-    .stagger.in > *:nth-child(2) { transition-delay: 0.15s; }
-    .stagger.in > *:nth-child(3) { transition-delay: 0.25s; }
-    .stagger.in > *:nth-child(4) { transition-delay: 0.35s; }
-    .stagger.in > *:nth-child(5) { transition-delay: 0.45s; }
-    .stagger.in > * { opacity: 1; transform: translateY(0); }
-
-    /* Pill */
+ 
+    /* ——— Spec chips ——— */
     .pill {
       display: inline-flex;
       align-items: center;
       padding: 4px 10px;
-      border: 1px solid rgba(245, 243, 239, 0.10);
-      border-radius: 999px;
-      font-family: 'JetBrains Mono', monospace;
+      border: 1px solid rgba(18, 32, 54, 0.25);
+      border-radius: 2px;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 11px;
-      color: #a8a29e;
-      background: rgba(245, 243, 239, 0.02);
-      transition: all 0.3s ease;
+      color: #5a6b80;
+      background: rgba(255, 255, 255, 0.65);
+      transition: all 0.25s ease;
     }
-    .pill:hover { color: #d4a574; border-color: rgba(212, 165, 116, 0.4); }
-
-    /* Live dot */
+    .pill:hover { color: #1f45d9; border-color: #1f45d9; }
+ 
+    /* ——— Live dot ——— */
     .live-dot {
       display: inline-block;
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #84cc16;
-      box-shadow: 0 0 8px rgba(132, 204, 22, 0.6);
+      background: #d6492a;
+      box-shadow: 0 0 0 3px rgba(214, 73, 42, 0.15);
       animation: pulse 2s ease-in-out infinite;
-      margin-right: 8px;
+      margin-right: 9px;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      50% { opacity: 0.35; }
     }
-
-    /* Section number */
-    .section-num {
-      font-family: 'JetBrains Mono', monospace;
+ 
+    /* ——— Rubber stamp (status marks on drawings) ——— */
+    .stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 11px;
-      letter-spacing: 0.1em;
-      color: #57534e;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #d6492a;
+      border: 1.5px solid rgba(214, 73, 42, 0.75);
+      border-radius: 2px;
+      padding: 6px 12px;
+      transform: rotate(-2.5deg);
+      background: rgba(255, 255, 255, 0.7);
     }
-    .section-title {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
+ 
+    /* ——— Title block (engineering drawing corner table) ——— */
+    .titleblock {
+      border: 1px solid rgba(18, 32, 54, 0.5);
+      background: #ffffff;
+      font-size: 12px;
+      min-width: 250px;
+    }
+    .titleblock .tb-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      border-top: 1px solid rgba(18, 32, 54, 0.18);
+    }
+    .titleblock .tb-row:first-child { border-top: none; }
+    .titleblock .tb-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8da0b5;
+      padding: 8px 10px;
+      border-right: 1px solid rgba(18, 32, 54, 0.18);
+    }
+    .titleblock .tb-value {
+      padding: 7px 10px;
+      color: #122036;
       font-weight: 400;
-      font-size: clamp(2.25rem, 5vw, 3.75rem);
-      line-height: 1;
-      letter-spacing: -0.02em;
     }
-
-    /* Project card hover */
+ 
+    /* ——— Project cards: drawing plates with corner ticks ——— */
     .project-card {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(245, 243, 239, 0.08);
+      position: relative;
+      background: #ffffff;
+      border: 1px solid rgba(18, 32, 54, 0.22);
+      border-radius: 2px;
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
     }
+    .project-card::before,
+    .project-card::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-color: #1f45d9;
+      border-style: solid;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+    .project-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .project-card::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
     .project-card:hover {
-      border-color: rgba(212, 165, 116, 0.35);
+      border-color: rgba(31, 69, 217, 0.55);
       transform: translateY(-2px);
+      box-shadow: 0 12px 32px -18px rgba(18, 32, 54, 0.35);
     }
-
-    /* Underline link */
+ 
+    /* ——— Underline link ——— */
     .ulink {
       position: relative;
-      color: #f5f3ef;
+      color: #122036;
       transition: color 0.3s;
     }
     .ulink::after {
@@ -174,46 +235,97 @@
       transform-origin: right;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .ulink:hover { color: #d4a574; }
+    .ulink:hover { color: #1f45d9; }
     .ulink:hover::after { transform: scaleX(1); transform-origin: left; }
-
-    /* Nav link */
+ 
+    /* ——— Nav link ——— */
     .nav-link {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 11px;
-      color: #a8a29e;
+      letter-spacing: 0.05em;
+      color: #5a6b80;
       transition: color 0.3s;
     }
-    .nav-link:hover { color: #d4a574; }
-
-    /* Timeline rail */
+    .nav-link:hover { color: #1f45d9; }
+ 
+    /* ——— Timeline as dimension rail ——— */
     .timeline-item {
       position: relative;
       padding-left: 28px;
-      border-left: 1px solid rgba(245, 243, 239, 0.10);
+      border-left: 1px solid rgba(18, 32, 54, 0.22);
     }
     .timeline-item::before {
       content: '';
       position: absolute;
       left: -5px;
-      top: 6px;
+      top: 7px;
       width: 9px;
       height: 9px;
-      border-radius: 50%;
-      background: #d4a574;
-      box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.12);
+      background: #1f45d9;
+      box-shadow: 0 0 0 3px #f4f7f9, 0 0 0 4px rgba(31, 69, 217, 0.4);
     }
-
-    main { position: relative; z-index: 2; }
+ 
+    /* ——— CTA button ——— */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid #1f45d9;
+      border-radius: 2px;
+      color: #1f45d9;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.7);
+    }
+    .cta-btn:hover { background: #1f45d9; color: #ffffff; }
+ 
+    /* ——— Scroll cue ——— */
+    .scroll-tick {
+      display: inline-block;
+      color: #1f45d9;
+      animation: nudge 1.6s ease-in-out infinite;
+    }
+    @keyframes nudge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+ 
+    /* ——— Reveal on scroll ——— */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+ 
+    .stagger > * { opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .stagger.in > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger.in > *:nth-child(2) { transition-delay: 0.15s; }
+    .stagger.in > *:nth-child(3) { transition-delay: 0.25s; }
+    .stagger.in > *:nth-child(4) { transition-delay: 0.35s; }
+    .stagger.in > *:nth-child(5) { transition-delay: 0.45s; }
+    .stagger.in > * { opacity: 1; transform: translateY(0); }
+ 
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal, .stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .live-dot, .scroll-tick { animation: none; }
+    }
+ 
+    main { position: relative; }
   </style>
 </head>
-
+ 
 <body class="overflow-x-hidden">
-
+ 
   <!-- Nav -->
-  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-ink/70 border-b border-white/5">
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-paper/80 border-b border-ink/10">
     <div class="max-w-6xl mx-auto px-6 sm:px-10 py-4 flex items-center justify-between">
-      <a href="#top" class="font-serif italic text-lg">Anmol Mishra</a>
+      <a href="#top" class="font-display text-lg tracking-tight" style="font-weight:700;">Anmol Mishra</a>
       <div class="hidden md:flex items-center gap-8">
         <a href="#about" class="nav-link">01 about</a>
         <a href="#stack" class="nav-link">02 stack</a>
@@ -224,168 +336,177 @@
       <a href="#contact" class="md:hidden nav-link">contact →</a>
     </div>
   </nav>
-
+ 
   <main>
-
+ 
     <!-- HERO -->
-    <section id="top" class="hero-glow min-h-screen flex items-center px-6 sm:px-10 pt-24 pb-16">
-      <div class="max-w-6xl mx-auto w-full">
+    <section id="top" class="min-h-screen flex items-center px-6 sm:px-10 pt-28 pb-16">
+      <div class="max-w-6xl mx-auto w-full sheet py-8">
         <div class="stagger reveal">
           <div class="flex items-center mb-10">
             <span class="live-dot"></span>
-            <span class="font-mono text-xs text-muted tracking-wider uppercase">Currently engineering AI products in Gurugram</span>
+            <span class="font-mono text-xs text-graphite tracking-wider uppercase">Currently engineering AI products in Gurugram</span>
           </div>
-
-          <h1 class="font-serif text-[clamp(3.5rem,11vw,9rem)] leading-[0.95] tracking-tight mb-6">
-            Anmol <span class="italic">Mishra.</span>
+ 
+          <h1 class="font-display text-[clamp(3.25rem,10vw,8.25rem)] leading-[0.95] tracking-tight mb-8" style="font-weight:800;">
+            Anmol Mishra<span class="text-cobalt">.</span>
           </h1>
-
-          <p class="text-xl sm:text-2xl text-paper/80 font-light max-w-3xl leading-relaxed mb-10">
-            Full-stack developer building <span class="text-glow italic font-serif text-2xl sm:text-3xl">AI-powered products</span> with Laravel, Next.js, and GPT integrations.
+ 
+          <p class="text-xl sm:text-2xl text-ink/80 font-light max-w-3xl leading-relaxed mb-10">
+            Full-stack developer building <span class="annotated">AI-powered products</span> with Laravel, Next.js, and GPT integrations.
           </p>
-
-          <div class="flex flex-wrap gap-2 mb-12">
-            <span class="pill">Laravel</span>
-            <span class="pill">Next.js</span>
-            <span class="pill">React</span>
-            <span class="pill">PHP</span>
-            <span class="pill">MySQL</span>
-            <span class="pill">GPT API</span>
-            <span class="pill">REST APIs</span>
-          </div>
-
-          <div class="flex items-center gap-2 font-mono text-xs text-dim">
-            <span>scroll</span>
-            <span class="cursor-blink"></span>
+ 
+          <div class="grid lg:grid-cols-[1fr_auto] gap-10 lg:items-end">
+            <div>
+              <div class="flex flex-wrap gap-2 mb-10">
+                <span class="pill">Laravel</span>
+                <span class="pill">Next.js</span>
+                <span class="pill">React</span>
+                <span class="pill">PHP</span>
+                <span class="pill">MySQL</span>
+                <span class="pill">GPT API</span>
+                <span class="pill">REST APIs</span>
+              </div>
+ 
+              <div class="flex items-center gap-2 font-mono text-xs text-faint uppercase tracking-wider">
+                <span>scroll</span>
+                <span class="scroll-tick">▾</span>
+              </div>
+            </div>
+ 
+            <!-- Title block -->
+            <div class="titleblock reveal" aria-label="Sheet information">
+              <div class="tb-row"><span class="tb-label">Drawn by</span><span class="tb-value">Anmol Mishra</span></div>
+              <div class="tb-row"><span class="tb-label">Location</span><span class="tb-value">Gurugram, India</span></div>
+              <div class="tb-row"><span class="tb-label">Role</span><span class="tb-value">Laravel Developer · Ekaleido Innovations</span></div>
+              <div class="tb-row"><span class="tb-label">Status</span><span class="tb-value text-cobalt">Open to full-time roles · Remote / Hybrid</span></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-
+ 
     <!-- ABOUT -->
-    <section id="about" class="px-6 sm:px-10 py-24 sm:py-32">
-      <div class="max-w-6xl mx-auto">
+    <section id="about" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-ink/10">
+      <div class="max-w-6xl mx-auto sheet py-6">
         <div class="reveal">
-          <p class="section-num mb-4">— 01 / about</p>
+          <div class="flex items-center gap-5 mb-5">
+            <p class="section-num">01 / about</p>
+            <div class="dim-line" aria-hidden="true"></div>
+          </div>
           <h2 class="section-title mb-16 max-w-3xl">A developer who likes shipping real things.</h2>
         </div>
-
+ 
         <div class="grid md:grid-cols-3 gap-12 md:gap-16">
-          <div class="md:col-span-2 space-y-6 text-paper/75 leading-relaxed reveal">
+          <div class="md:col-span-2 space-y-6 text-ink/80 leading-relaxed reveal">
             <p>
               I'm a full-stack developer with 2.5+ years of experience building production web applications. I work primarily with Laravel on the backend and Next.js on the frontend, and lately I've been spending most of my time on AI integration work — wiring GPT-based models into real product workflows.
             </p>
             <p>
-              Right now I'm the lead developer on <span class="text-glow font-serif italic">Imagive AI</span> at Ekaleido Innovations, an AI content generation platform serving enterprise clients. I built it from scratch — the Laravel REST backend, the Next.js SSR frontend, the queue-based job processing, the GPT integration layer.
+              Right now I'm the lead developer on <span class="annotated">Imagive AI</span> at Ekaleido Innovations, an AI content generation platform serving enterprise clients. I built it from scratch — the Laravel REST backend, the Next.js SSR frontend, the queue-based job processing, the GPT integration layer.
             </p>
             <p>
               I care about the unglamorous parts of software: clean APIs, sensible database schemas, error handling that actually helps when things break, and code that the next person can read. I'm comfortable owning features end-to-end and want to keep working on products where AI is a meaningful part of the stack — not a marketing label.
             </p>
           </div>
-
+ 
           <aside class="reveal">
-            <div class="space-y-6 font-mono text-xs">
-              <div>
-                <p class="text-dim uppercase tracking-wider mb-1">Based in</p>
-                <p class="text-paper/90">Gurugram, India</p>
-              </div>
-              <div>
-                <p class="text-dim uppercase tracking-wider mb-1">Currently</p>
-                <p class="text-paper/90">Laravel Developer<br/>Ekaleido Innovations</p>
-              </div>
-              <div>
-                <p class="text-dim uppercase tracking-wider mb-1">Focus</p>
-                <p class="text-paper/90">AI integration<br/>Full-stack systems</p>
-              </div>
-              <div>
-                <p class="text-dim uppercase tracking-wider mb-1">Open to</p>
-                <p class="text-glow">Full-time roles · Remote / Hybrid</p>
-              </div>
+            <div class="titleblock">
+              <div class="tb-row"><span class="tb-label">Based in</span><span class="tb-value">Gurugram, India</span></div>
+              <div class="tb-row"><span class="tb-label">Currently</span><span class="tb-value">Laravel Developer<br/>Ekaleido Innovations</span></div>
+              <div class="tb-row"><span class="tb-label">Focus</span><span class="tb-value">AI integration<br/>Full-stack systems</span></div>
+              <div class="tb-row"><span class="tb-label">Open to</span><span class="tb-value text-cobalt">Full-time roles · Remote / Hybrid</span></div>
             </div>
           </aside>
         </div>
       </div>
     </section>
-
+ 
     <!-- STACK -->
-    <section id="stack" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
+    <section id="stack" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-ink/10">
+      <div class="max-w-6xl mx-auto sheet py-6">
         <div class="reveal">
-          <p class="section-num mb-4">— 02 / stack</p>
+          <div class="flex items-center gap-5 mb-5">
+            <p class="section-num">02 / stack</p>
+            <div class="dim-line" aria-hidden="true"></div>
+          </div>
           <h2 class="section-title mb-16 max-w-3xl">The tools I reach for.</h2>
         </div>
-
+ 
         <div class="grid md:grid-cols-2 gap-x-16 gap-y-12">
           <div class="reveal">
-            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// backend</p>
-            <p class="text-paper/85 leading-loose">
+            <p class="font-mono text-xs text-cobalt uppercase tracking-[0.14em] mb-4">■ backend</p>
+            <p class="text-ink/85 leading-loose">
               PHP · Laravel · Eloquent ORM · MVC architecture · RESTful API design · Authentication &amp; authorization · Queue-based job processing · Laravel Blade
             </p>
           </div>
-
+ 
           <div class="reveal">
-            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// frontend</p>
-            <p class="text-paper/85 leading-loose">
+            <p class="font-mono text-xs text-cobalt uppercase tracking-[0.14em] mb-4">■ frontend</p>
+            <p class="text-ink/85 leading-loose">
               JavaScript · React.js · Next.js (SSR) · Redux · HTML5 · CSS3 · Tailwind CSS · Bootstrap · Responsive design
             </p>
           </div>
-
+ 
           <div class="reveal">
-            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// ai &amp; integrations</p>
-            <p class="text-paper/85 leading-loose">
+            <p class="font-mono text-xs text-cobalt uppercase tracking-[0.14em] mb-4">■ ai &amp; integrations</p>
+            <p class="text-ink/85 leading-loose">
               OpenAI / GPT API · Prompt engineering · Web scraping (Symfony DomCrawler, Guzzle) · Async job pipelines for model calls
             </p>
           </div>
-
+ 
           <div class="reveal">
-            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// data &amp; infra</p>
-            <p class="text-paper/85 leading-loose">
+            <p class="font-mono text-xs text-cobalt uppercase tracking-[0.14em] mb-4">■ data &amp; infra</p>
+            <p class="text-ink/85 leading-loose">
               MySQL · PostgreSQL · Schema design · Query optimization · Google Cloud Platform (GCP)
             </p>
           </div>
-
+ 
           <div class="reveal md:col-span-2">
-            <p class="font-mono text-xs text-glow uppercase tracking-wider mb-4">// tools &amp; practices</p>
-            <p class="text-paper/85 leading-loose">
+            <p class="font-mono text-xs text-cobalt uppercase tracking-[0.14em] mb-4">■ tools &amp; practices</p>
+            <p class="text-ink/85 leading-loose">
               Git &amp; GitHub · Composer · Postman · Agile / Scrum · Code review · Debugging across the stack
             </p>
           </div>
         </div>
       </div>
     </section>
-
+ 
     <!-- EXPERIENCE -->
-    <section id="experience" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
+    <section id="experience" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-ink/10">
+      <div class="max-w-6xl mx-auto sheet py-6">
         <div class="reveal">
-          <p class="section-num mb-4">— 03 / experience</p>
+          <div class="flex items-center gap-5 mb-5">
+            <p class="section-num">03 / experience</p>
+            <div class="dim-line" aria-hidden="true"></div>
+          </div>
           <h2 class="section-title mb-16 max-w-3xl">Where I've been building.</h2>
         </div>
-
+ 
         <div class="space-y-14 max-w-4xl">
-
+ 
           <article class="timeline-item reveal">
             <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-              <h3 class="text-xl font-medium text-paper">Laravel Developer</h3>
-              <span class="font-mono text-xs text-dim">Jul 2024 — Present</span>
+              <h3 class="font-display text-xl text-ink" style="font-weight:600;">Laravel Developer</h3>
+              <span class="font-mono text-xs text-faint">Jul 2024 — Present</span>
             </div>
-            <p class="text-glow font-serif italic text-lg mb-6">Ekaleido Innovations Pvt Ltd · Gurugram, India</p>
-            <ul class="space-y-3 text-paper/75 leading-relaxed list-disc list-outside ml-5 marker:text-dim">
-              <li>Lead developer on <span class="text-paper">Imagive AI</span>, an AI content generation platform serving enterprise clients with copywriting, ad copy, and UGC scripts.</li>
+            <p class="text-cobalt font-mono text-sm mb-6">Ekaleido Innovations Pvt Ltd · Gurugram, India</p>
+            <ul class="space-y-3 text-ink/80 leading-relaxed list-disc list-outside ml-5 marker:text-faint">
+              <li>Lead developer on <span class="text-ink font-medium">Imagive AI</span>, an AI content generation platform serving enterprise clients with copywriting, ad copy, and UGC scripts.</li>
               <li>Built the Laravel backend from scratch — REST API design, authentication, role-based authorization, and queue-based job processing for asynchronous AI generation.</li>
               <li>Developed the Next.js frontend with server-side rendering for SEO and faster initial loads; managed application state with Redux.</li>
               <li>Integrated multiple GPT-based models for context-aware content generation, including prompt templating and output post-processing.</li>
               <li>Built web scraping modules using Symfony DomCrawler and Guzzle to collect and structure data from external sources for downstream AI workflows.</li>
             </ul>
           </article>
-
+ 
           <article class="timeline-item reveal">
             <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-              <h3 class="text-xl font-medium text-paper">Web Developer</h3>
-              <span class="font-mono text-xs text-dim">Aug 2023 — Jul 2024</span>
+              <h3 class="font-display text-xl text-ink" style="font-weight:600;">Web Developer</h3>
+              <span class="font-mono text-xs text-faint">Aug 2023 — Jul 2024</span>
             </div>
-            <p class="text-glow font-serif italic text-lg mb-6">Riveyra Infotech Pvt Ltd · Kanpur, India</p>
-            <ul class="space-y-3 text-paper/75 leading-relaxed list-disc list-outside ml-5 marker:text-dim">
+            <p class="text-cobalt font-mono text-sm mb-6">Riveyra Infotech Pvt Ltd · Kanpur, India</p>
+            <ul class="space-y-3 text-ink/80 leading-relaxed list-disc list-outside ml-5 marker:text-faint">
               <li>Built and maintained client-facing web applications for multiple clients using Laravel, PHP, and Bootstrap — including a government-facing portal for DGHRD, CBIC (Ministry of Finance).</li>
               <li>Developed both the public website and the Laravel Blade admin panel for DGHRDCBIC, enabling internal teams to manage content, notices, and circulars end-to-end.</li>
               <li>Implemented responsive frontend layouts ensuring a consistent experience across desktop, tablet, and mobile breakpoints.</li>
@@ -394,36 +515,37 @@
               <li>Owned features end-to-end: requirements, implementation, testing, deployment, and post-release maintenance.</li>
             </ul>
           </article>
-
+ 
         </div>
       </div>
     </section>
-
+ 
     <!-- WORK -->
-    <section id="work" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
+    <section id="work" class="px-6 sm:px-10 py-24 sm:py-32 border-t border-ink/10">
+      <div class="max-w-6xl mx-auto sheet py-6">
         <div class="reveal">
-          <p class="section-num mb-4">— 04 / work</p>
+          <div class="flex items-center gap-5 mb-5">
+            <p class="section-num">04 / work</p>
+            <div class="dim-line" aria-hidden="true"></div>
+          </div>
           <h2 class="section-title mb-16 max-w-3xl">Selected work.</h2>
         </div>
-
+ 
         <!-- Project 1: Imagive AI -->
-        <article class="project-card rounded-lg p-8 sm:p-12 bg-ink-card reveal mb-10">
+        <article class="project-card p-8 sm:p-12 reveal mb-10">
           <div class="flex flex-wrap items-start justify-between gap-4 mb-8">
             <div>
-              <p class="font-mono text-xs text-dim mb-2">FEATURED PROJECT · 2024 — PRESENT</p>
-              <a href="https://www.imagive.ai/" target="_blank" rel="noopener" class="group inline-flex items-baseline gap-3 hover:text-glow transition-colors">
-                <h3 class="font-serif italic text-4xl sm:text-5xl">Imagive AI</h3>
-                <span class="font-mono text-xs text-dim group-hover:text-glow transition-colors">↗ visit</span>
+              <p class="font-mono text-xs text-faint mb-2">FEATURED PROJECT · 2024 — PRESENT</p>
+              <a href="https://www.imagive.ai/" target="_blank" rel="noopener" class="group inline-flex items-baseline gap-3 hover:text-cobalt transition-colors">
+                <h3 class="font-display text-4xl sm:text-5xl tracking-tight" style="font-weight:700;">Imagive AI</h3>
+                <span class="font-mono text-xs text-faint group-hover:text-cobalt transition-colors">↗ visit</span>
               </a>
             </div>
-            <span class="pill" style="border-color: rgba(132, 204, 22, 0.4); color: #a3e635;">
-              <span class="live-dot" style="background: #84cc16;"></span>In production
-            </span>
+            <span class="stamp"><span class="live-dot" style="margin-right:0;"></span>In production</span>
           </div>
-
+ 
           <div class="grid md:grid-cols-3 gap-10">
-            <div class="md:col-span-2 space-y-4 text-paper/75 leading-relaxed">
+            <div class="md:col-span-2 space-y-4 text-ink/80 leading-relaxed">
               <p>
                 An enterprise AI content generation platform — copywriting, Facebook &amp; Google ad copy, and UGC scripts, powered by GPT-based models with custom prompt engineering for each content type.
               </p>
@@ -434,10 +556,10 @@
                 The work spans schema design, API contracts for users / generations / billing / templates, secure authentication flows, error handling for upstream model failures, and structured logging across the application.
               </p>
             </div>
-
+ 
             <div class="space-y-6">
               <div>
-                <p class="font-mono text-xs text-dim uppercase tracking-wider mb-3">Stack</p>
+                <p class="font-mono text-xs text-faint uppercase tracking-wider mb-3">Stack</p>
                 <div class="flex flex-wrap gap-2">
                   <span class="pill">Laravel</span>
                   <span class="pill">Next.js</span>
@@ -449,41 +571,39 @@
                 </div>
               </div>
               <div>
-                <p class="font-mono text-xs text-dim uppercase tracking-wider mb-3">Role</p>
-                <p class="text-paper/85 text-sm">Lead developer · End-to-end ownership</p>
+                <p class="font-mono text-xs text-faint uppercase tracking-wider mb-3">Role</p>
+                <p class="text-ink/85 text-sm">Lead developer · End-to-end ownership</p>
               </div>
             </div>
           </div>
-
-          <div class="mt-10 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-            <p class="font-mono text-xs text-dim">www.imagive.ai</p>
-            <a href="https://www.imagive.ai/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 border border-glow/40 rounded-full text-glow hover:bg-glow hover:text-ink transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+ 
+          <div class="mt-10 pt-8 border-t border-ink/10 flex flex-wrap items-center justify-between gap-4">
+            <p class="font-mono text-xs text-faint">www.imagive.ai</p>
+            <a href="https://www.imagive.ai/" target="_blank" rel="noopener" class="cta-btn">
               Visit live site
               <span>↗</span>
             </a>
           </div>
         </article>
-
+ 
         <!-- Project 2: DGHRDCBIC -->
-        <article class="project-card rounded-lg p-8 sm:p-12 bg-ink-card reveal">
+        <article class="project-card p-8 sm:p-12 reveal">
           <div class="flex flex-wrap items-start justify-between gap-4 mb-8">
             <div>
-              <p class="font-mono text-xs text-dim mb-2">GOVERNMENT PROJECT · 2023 — 2024</p>
-              <a href="https://dghrdcbic.gov.in/" target="_blank" rel="noopener" class="group inline-flex items-baseline gap-3 hover:text-glow transition-colors">
-                <h3 class="font-serif italic text-4xl sm:text-5xl">DGHRD, CBIC</h3>
-                <span class="font-mono text-xs text-dim group-hover:text-glow transition-colors">↗ visit</span>
+              <p class="font-mono text-xs text-faint mb-2">GOVERNMENT PROJECT · 2023 — 2024</p>
+              <a href="https://dghrdcbic.gov.in/" target="_blank" rel="noopener" class="group inline-flex items-baseline gap-3 hover:text-cobalt transition-colors">
+                <h3 class="font-display text-4xl sm:text-5xl tracking-tight" style="font-weight:700;">DGHRD, CBIC</h3>
+                <span class="font-mono text-xs text-faint group-hover:text-cobalt transition-colors">↗ visit</span>
               </a>
-              <p class="font-mono text-xs text-dim mt-2">Directorate General of Human Resource Development · Ministry of Finance</p>
+              <p class="font-mono text-xs text-faint mt-2">Directorate General of Human Resource Development · Ministry of Finance</p>
             </div>
-            <span class="pill" style="border-color: rgba(132, 204, 22, 0.4); color: #a3e635;">
-              <span class="live-dot" style="background: #84cc16;"></span>Live · gov.in
-            </span>
+            <span class="stamp"><span class="live-dot" style="margin-right:0;"></span>Live · gov.in</span>
           </div>
-
+ 
           <div class="grid md:grid-cols-3 gap-10">
-            <div class="md:col-span-2 space-y-4 text-paper/75 leading-relaxed">
+            <div class="md:col-span-2 space-y-4 text-ink/80 leading-relaxed">
               <p>
-                Official portal for the <span class="text-paper">Directorate General of Human Resource Development</span> under the Central Board of Indirect Taxes and Customs (CBIC), Ministry of Finance — built during my time at Riveyra Infotech.
+                Official portal for the <span class="text-ink font-medium">Directorate General of Human Resource Development</span> under the Central Board of Indirect Taxes and Customs (CBIC), Ministry of Finance — built during my time at Riveyra Infotech.
               </p>
               <p>
                 I developed both the public-facing website and the full Laravel Blade admin panel that internal teams use to manage notices, circulars, officer transfers, training material, and other HR-related content. The admin panel covers role-based access, content workflows, and document uploads with proper authorization checks.
@@ -492,10 +612,10 @@
                 Working on a government property meant strict requirements around accessibility, browser compatibility, and reliability — content needed to render correctly across a wide range of devices and network conditions, and updates pushed by admins had to reflect on the public site immediately.
               </p>
             </div>
-
+ 
             <div class="space-y-6">
               <div>
-                <p class="font-mono text-xs text-dim uppercase tracking-wider mb-3">Stack</p>
+                <p class="font-mono text-xs text-faint uppercase tracking-wider mb-3">Stack</p>
                 <div class="flex flex-wrap gap-2">
                   <span class="pill">Laravel</span>
                   <span class="pill">Blade</span>
@@ -506,95 +626,102 @@
                 </div>
               </div>
               <div>
-                <p class="font-mono text-xs text-dim uppercase tracking-wider mb-3">Role</p>
-                <p class="text-paper/85 text-sm">Developer · Website + Admin panel</p>
+                <p class="font-mono text-xs text-faint uppercase tracking-wider mb-3">Role</p>
+                <p class="text-ink/85 text-sm">Developer · Website + Admin panel</p>
               </div>
             </div>
           </div>
-
-          <div class="mt-10 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-            <p class="font-mono text-xs text-dim">dghrdcbic.gov.in</p>
-            <a href="https://dghrdcbic.gov.in/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 border border-glow/40 rounded-full text-glow hover:bg-glow hover:text-ink transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+ 
+          <div class="mt-10 pt-8 border-t border-ink/10 flex flex-wrap items-center justify-between gap-4">
+            <p class="font-mono text-xs text-faint">dghrdcbic.gov.in</p>
+            <a href="https://dghrdcbic.gov.in/" target="_blank" rel="noopener" class="cta-btn">
               Visit live site
               <span>↗</span>
             </a>
           </div>
         </article>
-
-        <p class="font-mono text-xs text-dim mt-12 text-center">More projects shipping soon →</p>
+ 
+        <p class="font-mono text-xs text-faint mt-12 text-center">More projects shipping soon →</p>
       </div>
     </section>
-
+ 
     <!-- CONTACT -->
-    <section id="contact" class="px-6 sm:px-10 py-24 sm:py-40 border-t border-white/5 hero-glow">
-      <div class="max-w-6xl mx-auto">
+    <section id="contact" class="px-6 sm:px-10 py-24 sm:py-40 border-t border-ink/10">
+      <div class="max-w-6xl mx-auto sheet py-6">
         <div class="reveal">
-          <p class="section-num mb-4">— 05 / contact</p>
-          <h2 class="font-serif italic text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] tracking-tight mb-12 max-w-4xl">
-            Let's build something useful together.
+          <div class="flex items-center gap-5 mb-5">
+            <p class="section-num">05 / contact</p>
+            <div class="dim-line" aria-hidden="true"></div>
+          </div>
+          <h2 class="font-display text-[clamp(2.5rem,7.5vw,5.5rem)] leading-[0.98] tracking-tight mb-12 max-w-4xl" style="font-weight:800;">
+            Let's build something useful together<span class="text-cobalt">.</span>
           </h2>
         </div>
-
+ 
         <div class="reveal max-w-4xl">
-          <p class="text-paper/75 text-lg leading-relaxed mb-12 max-w-2xl">
+          <p class="text-ink/80 text-lg leading-relaxed mb-12 max-w-2xl">
             I'm currently open to full-time full-stack roles — especially anything involving AI integration, Laravel, or Next.js. The fastest way to reach me is email.
           </p>
-
+ 
           <div class="grid sm:grid-cols-3 gap-6 mb-16">
-            <a href="mailto:anmolmishra2304@gmail.com" class="project-card rounded-lg p-6 group block">
-              <p class="font-mono text-xs text-dim uppercase tracking-wider mb-2">Email</p>
-              <p class="text-base text-paper group-hover:text-glow transition-colors break-all">anmolmishra2304@gmail.com</p>
-              <p class="font-mono text-xs text-dim mt-3">→ write me</p>
+            <a href="mailto:anmolmishra2304@gmail.com" class="project-card p-6 group block">
+              <p class="font-mono text-xs text-faint uppercase tracking-wider mb-2">Email</p>
+              <p class="text-base text-ink group-hover:text-cobalt transition-colors break-all">anmolmishra2304@gmail.com</p>
+              <p class="font-mono text-xs text-faint mt-3">→ write me</p>
             </a>
-
-            <a href="https://linkedin.com/in/anmolmishra23" target="_blank" rel="noopener" class="project-card rounded-lg p-6 group block">
-              <p class="font-mono text-xs text-dim uppercase tracking-wider mb-2">LinkedIn</p>
-              <p class="text-base text-paper group-hover:text-glow transition-colors break-all">/in/anmolmishra23</p>
-              <p class="font-mono text-xs text-dim mt-3">→ connect</p>
+ 
+            <a href="https://linkedin.com/in/anmolmishra23" target="_blank" rel="noopener" class="project-card p-6 group block">
+              <p class="font-mono text-xs text-faint uppercase tracking-wider mb-2">LinkedIn</p>
+              <p class="text-base text-ink group-hover:text-cobalt transition-colors break-all">/in/anmolmishra23</p>
+              <p class="font-mono text-xs text-faint mt-3">→ connect</p>
             </a>
-
-            <a href="https://github.com/anmolmishra23-dev" target="_blank" rel="noopener" class="project-card rounded-lg p-6 group block">
-              <p class="font-mono text-xs text-dim uppercase tracking-wider mb-2">GitHub</p>
-              <p class="text-base text-paper group-hover:text-glow transition-colors break-all">/anmolmishra23-dev</p>
-              <p class="font-mono text-xs text-dim mt-3">→ see code</p>
+ 
+            <a href="https://github.com/anmolmishra23-dev" target="_blank" rel="noopener" class="project-card p-6 group block">
+              <p class="font-mono text-xs text-faint uppercase tracking-wider mb-2">GitHub</p>
+              <p class="text-base text-ink group-hover:text-cobalt transition-colors break-all">/anmolmishra23-dev</p>
+              <p class="font-mono text-xs text-faint mt-3">→ see code</p>
             </a>
           </div>
-
-          <div class="font-mono text-xs text-dim flex items-center gap-3">
+ 
+          <div class="font-mono text-xs text-graphite flex items-center gap-3">
             <span>+91 8317010149</span>
-            <span class="text-white/10">/</span>
+            <span class="text-ink/15">/</span>
             <span>Gurugram · India</span>
           </div>
         </div>
       </div>
     </section>
-
+ 
     <!-- FOOTER -->
-    <footer class="px-6 sm:px-10 py-10 border-t border-white/5">
-      <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-dim">
+    <footer class="px-6 sm:px-10 py-10 border-t border-ink/10">
+      <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-faint">
         <p>© <span id="year"></span> Anmol Mishra</p>
         <p>Built with Tailwind · hosted on GitHub Pages</p>
       </div>
     </footer>
-
+ 
   </main>
-
+ 
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
+ 
     // Reveal on scroll
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('in');
           io.unobserve(e.target);
-        } 
+        }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+ 
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (prefersReduced) { el.classList.add('in'); return; }
+      io.observe(el);
+    });
   </script>
-   
-</body> 
+ 
+</body>
 </html>
