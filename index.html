@@ -630,19 +630,17 @@
                 <span class="pill pill-dark">AWS Lambda</span>
               </div>
 
-              <!-- Stats counters -->
+              <!-- Stats counters. Real values live in the HTML so no-JS readers
+                   (crawlers, previews, LLM screeners) see them; the script counts
+                   up from zero to whatever is already here. -->
               <div class="grid grid-cols-3 gap-6 max-w-md mb-10">
                 <div>
-                  <p class="stat-num"><span data-count="3">0</span>+</p>
+                  <p class="stat-num"><span data-count-to="3">3</span>+</p>
                   <p class="stat-label mt-2">yrs shipping</p>
                 </div>
                 <div>
-                  <p class="stat-num"><span data-count="2">0</span></p>
+                  <p class="stat-num"><span data-count-to="2">2</span></p>
                   <p class="stat-label mt-2">products live</p>
-                </div>
-                <div>
-                  <p class="stat-num"><span data-count="10">0</span>+</p>
-                  <p class="stat-label mt-2">APIs integrated</p>
                 </div>
               </div>
 
@@ -938,7 +936,10 @@
           </div>
         </article>
 
-        <p class="font-mono text-xs text-faint mt-12 text-center">More projects shipping soon →</p>
+        <p class="font-mono text-xs text-faint mt-12 text-center">
+          More work on
+          <a href="https://github.com/anmolmishra23-dev" target="_blank" rel="noopener" class="ulink text-graphite">github.com/anmolmishra23-dev ↗</a>
+        </p>
       </div>
     </section>
 
@@ -1073,12 +1074,10 @@
       <div class="max-w-6xl mx-auto">
         <p class="font-mono text-xs text-steel/70 leading-relaxed mb-6 max-w-4xl">
           Anmol Mishra — full-stack developer in Gurgaon (Gurugram), Haryana, India.
-          Laravel developer · Next.js developer · PHP developer · React developer ·
-          Python &amp; FastAPI developer · AI / LLM integration engineer (OpenAI GPT, Google Gemini).
           Currently lead developer at Ekaleido Innovations — open to select full-time and remote opportunities across Delhi NCR and India.
         </p>
         <div class="flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-steel">
-          <p>© <span id="year"></span> Anmol Mishra</p>
+          <p>© <span id="year">2026</span> Anmol Mishra</p>
           <p>designed &amp; built by <span class="text-mint">Anmol Mishra</span></p>
         </div>
       </div>
@@ -1087,7 +1086,7 @@
   </main>
 
   <script>
-    // Year
+    // Year — replaces the year already rendered in the HTML, so a no-JS render is still correct.
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1127,12 +1126,13 @@
 
     // ——— Count-up stats ———
     function countUp(el) {
-      const target = +el.dataset.count;
-      if (prefersReduced) { el.textContent = target; return; }
+      // The value is already in the DOM; animate from zero back up to it.
+      const target = +(el.dataset.countTo || el.textContent);
+      if (prefersReduced || !Number.isFinite(target)) { el.textContent = target; return; }
       const dur = 1200, start = performance.now();
       (function frame(now) {
         const p = Math.min((now - start) / dur, 1);
-        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        el.textContent = p < 1 ? Math.round(target * (1 - Math.pow(1 - p, 3))) : target;
         if (p < 1) requestAnimationFrame(frame);
       })(start);
     }
@@ -1141,7 +1141,7 @@
         if (e.isIntersecting) { countUp(e.target); statIO.unobserve(e.target); }
       });
     }, { threshold: 0.6 });
-    document.querySelectorAll('[data-count]').forEach(el => statIO.observe(el));
+    document.querySelectorAll('[data-count-to]').forEach(el => statIO.observe(el));
 
     // ——— Reveal on scroll ———
     const io = new IntersectionObserver((entries) => {
