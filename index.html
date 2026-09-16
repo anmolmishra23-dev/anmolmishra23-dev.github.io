@@ -1076,7 +1076,7 @@
           Currently lead developer at Ekaleido Innovations — open to select full-time and remote opportunities across Delhi NCR and India.
         </p>
         <div class="flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-steel">
-          <p>© <span id="year"></span> Anmol Mishra</p>
+          <p>© <span id="year">2026</span> Anmol Mishra</p>
           <p>designed &amp; built by <span class="text-mint">Anmol Mishra</span></p>
         </div>
       </div>
@@ -1085,7 +1085,7 @@
   </main>
 
   <script>
-    // Year
+    // Year — replaces the year already rendered in the HTML, so a no-JS render is still correct.
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
